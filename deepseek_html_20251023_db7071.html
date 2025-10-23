@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma - Atendimento a Acidentes por Animais Peçonhentos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .step {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background-color: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .step-content {
+            padding-left: 55px;
+        }
+        
+        .step-content p {
+            margin-bottom: 10px;
+        }
+        
+        .animal-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .animal-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            border-left: 4px solid #e74c3c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .animal-card:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .animal-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .animal-details {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .treatment-info {
+            background-color: #e8f4fd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .treatment-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .dosage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .dosage-table th, .dosage-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .dosage-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        .dosage-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .severity {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .severity-mild {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .severity-moderate {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .severity-severe {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+        
+        .note-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #856404;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .step-content {
+                padding-left: 0;
+            }
+            
+            .animal-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fluxograma para Atendimento de Acidentes por Animais Peçonhentos</h1>
+            <p class="subtitle">Protocolo baseado nas recomendações do Ministério da Saúde</p>
+        </header>
+        
+        <div class="flowchart">
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Identificação do Paciente e do Acidente</div>
+                </div>
+                <div class="step-content">
+                    <p>Coletar informações sobre o paciente e as circunstâncias do acidente:</p>
+                    <ul>
+                        <li>Dados pessoais (nome, idade, sexo, gestação)</li>
+                        <li>Data e hora do acidente</li>
+                        <li>Local da picada/ferimento</li>
+                        <li>Animal causador (se identificado)</li>
+                        <li>Tempo decorrido entre acidente e atendimento</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Avaliação Clínica Inicial</div>
+                </div>
+                <div class="step-content">
+                    <p>Verificar sinais e sintomas para classificar a gravidade do caso:</p>
+                    <div class="animal-list">
+                        <div class="animal-card">
+                            <div class="animal-name">Serpentes</div>
+                            <div class="animal-details">Edema, dor, equimose, sangramentos</div>
+                        </div>
+                        <div class="animal-card">
+                            <div class="animal-name">Aranhas</div>
+                            <div class="animal-details">Dor local, sudorese, agitação, alterações visuais</div>
+                        </div>
+                        <div class="animal-card">
+                            <div class="animal-name">Escorpiões</div>
+                            <div class="animal-details">Dor intensa, vômitos, sudorese, agitação</div>
+                        </div>
+                        <div class="animal-card">
+                            <div class="animal-name">Lagartas</div>
+                            <div class="animal-details">Dor, eritema, alterações na coagulação</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Classificação da Gravidade</div>
+                </div>
+                <div class="step-content">
+                    <p>Classificar o acidente conforme a gravidade:</p>
+                    <ul>
+                        <li><span class="severity severity-mild">Leve</span>: Sintomas locais discretos, sem manifestações sistêmicas</li>
+                        <li><span class="severity severity-moderate">Moderado</span>: Sintomas locais evidentes, manifestações sistêmicas discretas</li>
+                        <li><span class="severity severity-severe">Grave</span>: Sintomas intensos, manifestações sistêmicas importantes, risco de vida</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Identificação do Animal e Seleção do Soro</div>
+                </div>
+                <div class="step-content">
+                    <p>Identificar o tipo de animal para selecionar o soro antiveneno adequado:</p>
+                    
+                    <div class="treatment-info">
+                        <div class="treatment-title">Serpentes</div>
+                        <table class="dosage-table">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Soro</th>
+                                <th>Gravidade</th>
+                                <th>Dose (ampolas)</th>
+                            </tr>
+                            <tr>
+                                <td>Botrópico (jararaca)</td>
+                                <td>Antibotrópico (SAB)</td>
+                                <td><span class="severity severity-mild">Leve</span></td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Botrópico (jararaca)</td>
+                                <td>Antibotrópico (SAB)</td>
+                                <td><span class="severity severity-moderate">Moderado</span></td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>Botrópico (jararaca)</td>
+                                <td>Antibotrópico (SAB)</td>
+                                <td><span class="severity severity-severe">Grave</span></td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Crotálico (cascavel)</td>
+                                <td>Anticrotálico (SAC)</td>
+                                <td><span class="severity severity-mild">Leve</span></td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Crotálico (cascavel)</td>
+                                <td>Anticrotálico (SAC)</td>
+                                <td><span class="severity severity-moderate">Moderado</span></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Crotálico (cascavel)</td>
+                                <td>Anticrotálico (SAC)</td>
+                                <td><span class="severity severity-severe">Grave</span></td>
+                                <td>20</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="treatment-info">
+                        <div class="treatment-title">Aranhas e Escorpiões</div>
+                        <table class="dosage-table">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Soro</th>
+                                <th>Gravidade</th>
+                                <th>Dose (ampolas)</th>
+                            </tr>
+                            <tr>
+                                <td>Aranha Armadeira</td>
+                                <td>Antiaracnídico (SAA)</td>
+                                <td><span class="severity severity-moderate">Moderado</span></td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Aranha Armadeira</td>
+                                <td>Antiaracnídico (SAA)</td>
+                                <td><span class="severity severity-severe">Grave</span></td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>Aranha Marrom</td>
+                                <td>Antiaracnídico (SAA)</td>
+                                <td><span class="severity severity-severe">Cutâneo</span></td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Aranha Marrom</td>
+                                <td>Antiaracnídico (SAA)</td>
+                                <td><span class="severity severity-severe">Cutâneo-Visceral</span></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Escorpião</td>
+                                <td>Antiescorpiônico (SAEsc)</td>
+                                <td><span class="severity severity-moderate">Moderado</span></td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>Escorpião</td>
+                                <td>Antiescorpiônico (SAEsc)</td>
+                                <td><span class="severity severity-severe">Grave</span></td>
+                                <td>6</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Administração do Soro Antiveneno</div>
+                </div>
+                <div class="step-content">
+                    <p>Administrar o soro específico por via intravenosa conforme a dose indicada para a gravidade do caso.</p>
+                    <p><strong>Observações importantes:</strong></p>
+                    <ul>
+                        <li>O soro deve ser administrado o mais precocemente possível</li>
+                        <li>Realizar teste de sensibilidade antes da administração</li>
+                        <li>Monitorar o paciente durante e após a administração do soro</li>
+                        <li>Em caso de reação alérgica, tratar com anti-histamínicos e corticosteroides</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Tratamento de Suporte e Monitoramento</div>
+                </div>
+                <div class="step-content">
+                    <p>Realizar tratamento sintomático e de suporte conforme necessário:</p>
+                    <ul>
+                        <li>Analgesia para controle da dor</li>
+                        <li>Hidratação venosa</li>
+                        <li>Controle de náuseas e vômitos</li>
+                        <li>Monitoramento de sinais vitais</li>
+                        <li>Exames laboratoriais (coagulação, função renal)</li>
+                        <li>Profilaxia antitetânica, se indicada</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Notificação e Acompanhamento</div>
+                </div>
+                <div class="step-content">
+                    <p>Completar a ficha de notificação do SINAN (Sistema de Informação de Agravos de Notificação):</p>
+                    <ul>
+                        <li>Preencher todos os campos obrigatórios</li>
+                        <li>Registrar evolução do caso</li>
+                        <li>Notificar óbitos relacionados ao acidente</li>
+                        <li>Encaminhar para acompanhamento especializado, se necessário</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">Observações Importantes</div>
+                <p>1. Em caso de dúvida sobre o animal causador, utilizar o soro polivalente disponível.</p>
+                <p>2. Na ausência do soro específico, utilizar alternativas conforme indicação (ex.: na falta do SAB, utilizar SABC ou SABL).</p>
+                <p>3. O tempo entre o acidente e a administração do soro é crucial para o prognóstico.</p>
+                <p>4. Sempre considerar a possibilidade de reações alérgicas ao soro antiveneno.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Baseado nas recomendações do Ministério da Saúde - Processo SEI 00060-00031263/2022-61</p>
+            <p>Este fluxograma é uma ferramenta de apoio e não substitui o julgamento clínico do profissional de saúde.</p>
+        </footer>
+    </div>
+</body>
+</html>
