@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma HTLV - Prevenção e Vigilância</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5fb4;
+            --primary-light: #2d7bc9;
+            --secondary: #2ca52c;
+            --warning: #e6a700;
+            --danger: #dc3545;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: var(--primary-light);
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h3 i {
+            font-size: 1.1rem;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -10px;
+        }
+        
+        .highlight-box {
+            background-color: #e8f4ff;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 18px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .highlight-box i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .recommendation {
+            background-color: #f0f9f0;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin: 18px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .recommendation i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .warning {
+            background-color: #fff8e8;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid var(--warning);
+            margin: 18px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .warning i {
+            color: var(--warning);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        
+        .flow-process {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .process-step {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .category-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-gray);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .badge-primary {
+            background: #e8f4ff;
+            color: var(--primary);
+        }
+        
+        .badge-secondary {
+            background: #f0f9f0;
+            color: var(--secondary);
+        }
+        
+        .badge-warning {
+            background: #fff8e8;
+            color: var(--warning);
+        }
+        
+        .badge-danger {
+            background: #f8d7da;
+            color: var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fluxograma: Prevenção e Vigilância do HTLV-1/2</h1>
+            <p class="subtitle">Baseado no Guia de Manejo Clínico e Nota Técnica do Ministério da Saúde. Idealizado pelo Núcleo Hospitalar de Epidemiologia do Hospital Regional de Brazlândia-DF.
+
+</p>
+        </header>
+        
+        <div class="content-grid">
+            <div class="card">
+                <h2><i class="fas fa-syringe"></i> Prevenção da Transmissão</h2>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-venus-mars"></i> Transmissão Sexual</h3>
+                    <ul>
+                        <li>Uso de preservativo em todas as relações sexuais</li>
+                        <li>Triagem para HTLV-1/2 em indivíduos com suspeita ou infecção por IST</li>
+                        <li>Oferta de triagem sorológica para parceiros sexuais de pessoas vivendo com HTLV-1/2</li>
+                        <li>Reprodução assistida para casais sorodiferentes que desejam a concepção</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-baby"></i> Transmissão Vertical</h3>
+                    <ul>
+                        <li>Testagem sistemática de gestantes no pré-natal (1º trimestre)</li>
+                        <li>Contraindicação do aleitamento materno por mães vivendo com HTLV-1/2</li>
+                        <li>Uso de inibidores de lactação (Cabergolina 1mg, VO, dose única)</li>
+                        <li>Fornecimento de fórmulas lácteas infantis</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Atenção:</strong> O risco de transmissão pelo aleitamento materno pode chegar a mais de 30% quando ocorre por período superior a seis meses.
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Recomendação:</strong> Se a testagem não ocorreu durante a gestação, realizar no momento do parto. A amamentação pode ser oferecida até a obtenção do resultado.
+                        </div>
+                    </div>
+
+
+
+
+<div class="recommendation">
+                    <i class="fas fa-hand-holding-medical"></i>
+                    <div>
+                        <strong>Aconselhamento:</strong> Oferecer aconselhamento adequado para gestantes com HTLV sobre as medidas para prevenir a transmissão vertical.
+                    </div>
+                </div>
+
+
+
+<br>
+<br>
+
+<h2><i class="fas fa-clipboard-list"></i> Identificação de Casos</h2>
+
+  <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Identificação do caso suspeito</div>
+                        <p>Identificar indivíduos com suspeita de infecção por HTLV-1/2 através de:</p>
+                        <ul>
+                            <li>Teste de triagem reagente</li>
+                            <li>Sinais/sintomas sugestivos</li>
+                            <li>Histórico de exposição</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Confirmação diagnóstica</div>
+                        <p>Realizar teste confirmatório para HTLV-1/2 conforme fluxogramas vigentes.</p>
+                        <p><strong>Critério:</strong> Teste de triagem reagente + teste confirmatório reagente/detectado</p>
+                        <p>Consultar: <em>Guia de Manejo Clínico da Infecção pelo HTLV</em> do Ministério da Saúde</p>
+                    </div>
+
+                    
+                  
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-clipboard-list"></i> Notificação de Casos</h2>
+                
+                <div class="flow-process">
+
+                    
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Classificar o tipo de caso</div>
+                        <p>Selecione o tipo de caso para notificação:</p>
+                        <ul>
+                            <li><strong>Infecção pelo HTLV em gestante, parturiente ou puérpera</strong> <span class="badge badge-primary">CID-10: Z22.6</span></li>
+                            <li><strong>Criança exposta ao risco de transmissão vertical</strong> <span class="badge badge-secondary">CID-10: Z20.8</span></li>
+                            <li><strong>Infecção pelo HTLV</strong> <span class="badge badge-warning">CID-10: B33.3</span></li>
+                        </ul>
+                    </div>
+
+                    
+                    <br>
+<br>
+                                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Realizar notificação no e-SUS Sinan</div>
+                        <p><strong>Periocidade:</strong> Semanal (apenas casos confirmados)</p>
+                        <p><strong>Ficha:</strong> Ficha de Notificação/Conclusão do e-SUS Sinan</p>
+                        <p><strong>Observações importantes:</strong></p>
+                        <ul>
+                            <li>Gestante com HTLV deve ser notificada a cada evento gestacional</li>
+                            <li>Criança exposta deve ser notificada preferencialmente na maternidade</li>
+                            <li>Preencher campos "Sinais e Sintomas" e "Data de início de sintomas" conforme orientações</li>
+                        </ul>
+                    </div>
+                                        <br>
+<br>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Preenchimento dos campos específicos</div>
+                        <p><strong>Campo "Sinais e Sintomas":</strong></p>
+                        <ul>
+                            <li>Assinalar os sinais e sintomas identificados no momento do diagnóstico</li>
+                            <li>Se não disponível na tabela, selecionar "Outro, especifique" e descrever</li>
+                        </ul>
+                        
+                        <p><strong>Campo "Data de início dos sintomas":</strong></p>
+                        <ul>
+                            <li>Para gestante com diagnóstico durante pré-natal/parto/puerpério: data da coleta do exame confirmatório</li>
+                            <li>Para gestante com diagnóstico anterior: data de início da gestação (DUM, teste de gravidez ou US)</li>
+                            <li>Para criança exposta: data de nascimento ou data do exame confirmatório da mãe/nutriz</li>
+                            <li>Para adultos/crianças com infecção: data da coleta do exame confirmatório</li>
+                        </ul>
+                    </div>
+                    
+                    
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
+
+
+            
+                </div>
+                
+                
+                
+                
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+<p>Secretaria de Estado de Saúde do Distrito Federal | Vigilância Epidemiológica
+
+</p>
+            <p>Baseado no Guia de Manejo Clínico da Infecção pelo HTLV e Nota Técnica Nº 12/2025-CGIST/.DATHI/SVSA/MS</p>
+<p>Este é um instrumento de apoio. Sempre consulte o protocolo oficial e um profissional de saúde.</p>
+        </footer>
+    </div>
+</body>
+</html>
